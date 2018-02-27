@@ -1,5 +1,6 @@
 .idea
 .DS_Store
+.env
 
 # if you want to include wp-content folder in your new repo just comment this line below
 wp-content
