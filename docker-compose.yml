@@ -11,6 +11,15 @@ services:
             MYSQL_DATABASE: wordpressdocker
             MYSQL_USER: wordpressdocker
             MYSQL_PASSWORD: wordpressdocker
+    phpmyadmin:
+        depends_on:
+            - mysqldb
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - 8080:80
+        environment:
+            PMA_HOST: mysqldb
+            MYSQL_ROOT_PASSWORD: samplepasswor
     wordpress:
         depends_on:
             - mysqldb
