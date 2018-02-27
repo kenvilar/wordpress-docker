@@ -12,7 +12,7 @@ services:
             MYSQL_USER: wordpressdocker
             MYSQL_PASSWORD: wordpressdocker
         networks:
-            - wordpressdocker_n
+            - isolated_network
     phpmyadmin:
         depends_on:
             - mysqldb
@@ -23,7 +23,7 @@ services:
             PMA_HOST: mysqldb
             MYSQL_ROOT_PASSWORD: samplepassword
         networks:
-            - wordpressdocker_n
+            - isolated_network
     wordpress:
         depends_on:
             - mysqldb
@@ -39,8 +39,8 @@ services:
             WORDPRESS_DB_USER: wordpressdocker
             WORDPRESS_DB_PASSWORD: wordpressdocker
         networks:
-            - wordpressdocker_n
+            - isolated_network
 networks:
-    wordpressdocker_n:
+    isolated_network:
 volumes:
     db_data:
