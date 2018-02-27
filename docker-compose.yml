@@ -29,7 +29,8 @@ services:
             - mysqldb
         image: wordpress:latest
         ports:
-            - 80:80
+            - 8000:80
+            - 443:443
         restart: always
         volumes:
             - ./wp-content:/var/www/wp/wp-content
