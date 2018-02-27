@@ -11,6 +11,8 @@ services:
             MYSQL_DATABASE: wordpressdocker
             MYSQL_USER: wordpressdocker
             MYSQL_PASSWORD: wordpressdocker
+        networks:
+            - wordpressdocker_n
     phpmyadmin:
         depends_on:
             - mysqldb
@@ -19,7 +21,9 @@ services:
             - 8080:80
         environment:
             PMA_HOST: mysqldb
-            MYSQL_ROOT_PASSWORD: samplepasswor
+            MYSQL_ROOT_PASSWORD: samplepassword
+        networks:
+            - wordpressdocker_n
     wordpress:
         depends_on:
             - mysqldb
@@ -31,5 +35,7 @@ services:
             WORDPRESS_DB_HOST: mysqldb:3306
             WORDPRESS_DB_USER: wordpressdocker
             WORDPRESS_DB_PASSWORD: wordpressdocker
+networks:
+    wordpressdocker_n:
 volumes:
     db_data:
