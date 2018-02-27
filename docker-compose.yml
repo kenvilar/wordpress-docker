@@ -18,7 +18,7 @@ services:
             - mysqldb
         image: phpmyadmin/phpmyadmin
         ports:
-            - 8080:80
+            - 9000:80
         environment:
             PMA_HOST: mysqldb
             MYSQL_ROOT_PASSWORD: samplepassword
@@ -29,12 +29,16 @@ services:
             - mysqldb
         image: wordpress:latest
         ports:
-            - 8080:80
+            - 80:80
         restart: always
+        volumes:
+            - ./wp-content:/var/www/wp/wp-content
         environment:
             WORDPRESS_DB_HOST: mysqldb:3306
             WORDPRESS_DB_USER: wordpressdocker
             WORDPRESS_DB_PASSWORD: wordpressdocker
+        networks:
+            - wordpressdocker_n
 networks:
     wordpressdocker_n:
 volumes:
