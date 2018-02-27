@@ -6,11 +6,13 @@ services:
         volumes:
             - db_data:/var/lib/mysql
         restart: always
+        secrets:
+            - file_sec
         environment:
-            MYSQL_ROOT_PASSWORD: samplepassword
-            MYSQL_DATABASE: wordpressdocker
-            MYSQL_USER: wordpressdocker
-            MYSQL_PASSWORD: wordpressdocker
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
         networks:
             - isolated_network
     phpmyadmin:
@@ -19,9 +21,11 @@ services:
         image: phpmyadmin/phpmyadmin
         ports:
             - "9000:80"
+        secrets:
+            - file_sec
         environment:
             PMA_HOST: mysqldb
-            MYSQL_ROOT_PASSWORD: samplepassword
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
         networks:
             - isolated_network
     wordpress:
@@ -33,14 +37,19 @@ services:
         restart: always
         volumes:
             - .:/var/www/html/
+        secrets:
+            - file_sec
         environment:
             WORDPRESS_DB_HOST: mysqldb:3306
-            WORDPRESS_DB_NAME: wordpressdocker
-            WORDPRESS_DB_USER: wordpressdocker
-            WORDPRESS_DB_PASSWORD: wordpressdocker
+            WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+            WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+            WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
         networks:
             - isolated_network
 networks:
     isolated_network:
 volumes:
     db_data:
+secrets:
+    file_sec:
+        file: .env
