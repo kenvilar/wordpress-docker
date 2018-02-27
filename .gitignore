@@ -1,6 +1,19 @@
 .idea
 .DS_Store
 
+# if you want to include wp-content folder in your new repo just comment this line below
+wp-content
+
+### Wordpress
+wp-admin
+wp-includes
+wp-*.php
+xmlrpc.php
+readme.html
+license.txt
+index.php
+.htaccess
+
 ### JetBrains template
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
